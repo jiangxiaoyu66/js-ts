@@ -1,4 +1,8 @@
 // Proxy 对象
+/*
+  proxy MDN APi:
+  https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Proxy
+*/
 
 // const person = {
 //   name: 'zce',
@@ -29,8 +33,12 @@
 
 // personProxy.gender = true
 
-// console.log(personProxy.name)
-// console.log(personProxy.xxx)
+// console.log(personProxy.name)  // zce
+// console.log(personProxy.xxx)  // default
+// console.log(personProxy.age)  // 100
+// console.log(personProxy.gender)  // true
+// console.log(person) // { name: 'zce', age: 100, gender: true }
+
 
 // Proxy 对比 Object.defineProperty() ===============
 
@@ -43,13 +51,13 @@
 
 // const personProxy = new Proxy(person, {
 //   deleteProperty (target, property) {
-//     console.log('delete', property)
+//     console.log('delete', property)  // delete age
 //     delete target[property]
 //   }
 // })
 
 // delete personProxy.age
-// console.log(person)
+// console.log(person)  // { name: 'zce' }
 
 // 优势2：Proxy 可以很方便的监视数组操作 --------------------------
 
@@ -60,40 +68,42 @@
 //     console.log('set', property, value)
 //     target[property] = value
 //     return true // 表示设置成功
+//     // return false // 表示设置失败，会报错： 'set' on proxy: trap returned falsish
 //   }
 // })
 
-// listProxy.push(100)
+// const res = listProxy.push(100)
+// console.log(res);
 // listProxy.push(100)
 
 // 优势3：Proxy 不需要侵入对象 --------------------------
 
-// const person = {}
+const person = {}
 
-// Object.defineProperty(person, 'name', {
-//   get () {
-//     console.log('name 被访问')
-//     return person._name
-//   },
-//   set (value) {
-//     console.log('name 被设置')
-//     person._name = value
-//   }
-// })
-// Object.defineProperty(person, 'age', {
-//   get () {
-//     console.log('age 被访问')
-//     return person._age
-//   },
-//   set (value) {
-//     console.log('age 被设置')
-//     person._age = value
-//   }
-// })
+Object.defineProperty(person, 'name', {
+  get () {
+    console.log('name 被访问')
+    return person._name
+  },
+  set (value) {
+    console.log('name 被设置')
+    person._name = value
+  }
+})
+Object.defineProperty(person, 'age', {
+  get () {
+    console.log('age 被访问')
+    return person._age
+  },
+  set (value) {
+    console.log('age 被设置')
+    person._age = value
+  }
+})
 
-// person.name = 'jack'
+person.name = 'jack'
 
-// console.log(person.name)
+console.log(person.name)
 
 // Proxy 方式更为合理
 const person2 = {
@@ -114,4 +124,13 @@ const personProxy = new Proxy(person2, {
 
 personProxy.name = 'jack'
 
-console.log(personProxy.name)
+console.log(personProxy.name, person2)
+
+/* 
+  name 被设置
+  name 被访问
+  jack
+  set name jack
+  get name
+  jack { name: 'jack', age: 20 }
+*/

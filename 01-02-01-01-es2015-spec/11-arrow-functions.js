@@ -17,9 +17,16 @@ console.log(inc(100))
 
 const arr = [1, 2, 3, 4, 5, 6, 7]
 
+
+////////////////////////////////
+
 // arr.filter(function (item) {
 //   return item % 2
 // })
 
 // 常用场景，回调函数
-arr.filter(i => i % 2)
+const newArr = arr.filter(i => i % 2)
+console.log(newArr);
+/* 
+  [ 1, 3, 5, 7 ]
+*/

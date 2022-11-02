@@ -1,4 +1,5 @@
 // static 方法
+// 类的静态方法只能通过类来调用
 
 class Person {
   constructor (name) {

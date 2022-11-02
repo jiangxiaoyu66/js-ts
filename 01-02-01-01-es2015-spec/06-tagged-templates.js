@@ -10,6 +10,11 @@ const gender = false
 function myTagFunc (strings, name, gender) {
   // console.log(strings, name, gender)
   // return '123'
+  /**
+    [ 'hey, ', ' is a ', '.' ] 
+    tom false
+   */
+
   const sex = gender ? 'man' : 'woman'
   return strings[0] + name + strings[1] + sex + strings[2]
 }
@@ -17,3 +22,6 @@ function myTagFunc (strings, name, gender) {
 const result = myTagFunc`hey, ${name} is a ${gender}.`
 
 console.log(result)
+/**
+ * hey, tom is a woman.
+ */

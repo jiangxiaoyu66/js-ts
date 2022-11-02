@@ -1,4 +1,4 @@
-// Object.assign 方法
+// Object.assign 方法：把后续对象的属性写入第一个对象
 
 // const source1 = {
 //   a: 123,
@@ -18,7 +18,11 @@
 // const result = Object.assign(target, source1, source2)
 
 // console.log(target)
-// console.log(result === target)
+// console.log(result === target) // true
+
+
+////////////////////////////////
+
 
 // 应用场景
 
@@ -28,10 +32,11 @@ function func (obj) {
 
   const funcObj = Object.assign({}, obj)
   funcObj.name = 'func obj'
-  console.log(funcObj)
+  console.log(funcObj)  // { name: 'func obj' }
 }
 
 const obj = { name: 'global obj' }
 
-func(obj)
-console.log(obj)
+func(obj)  
+console.log(obj)  // { name: 'global obj' }
+
